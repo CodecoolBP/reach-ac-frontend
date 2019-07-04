@@ -9,21 +9,21 @@ class UserComponent extends React.Component {
         };
     }
 
-    setupWebSocket(){
+    setupWebSocket() {
         let webSocketInstance = this;
         let ws = new WebSocket('ws://localhost:8080/user');
-        ws.onerror = function(event){
+        ws.onerror = function (event) {
             console.log('error!');
             console.log(event)
         };
-        ws.onopen =function(event){
+        ws.onopen = function (event) {
             console.log('onopen!');
         };
-        ws.onmessage = function(event){
+        ws.onmessage = function (event) {
             console.log('onmessage!');
             webSocketInstance.handleData(event.data)
         };
-        ws.onclose = function(event){
+        ws.onclose = function (event) {
             console.log('onclose');
             setTimeout(webSocketInstance.setupWebSocket, 1000);
         };
@@ -40,7 +40,9 @@ class UserComponent extends React.Component {
         this.setupWebSocket();
         return (
             <div>
-                Count: <strong>{this.state.users}</strong>
+                <div>{
+                    this.state.users.toString()
+                }</div>
             </div>
         );
     }
